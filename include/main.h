@@ -19,9 +19,13 @@
 #define MAIN_H
 
 #include "mpi.h"
+#include <stdio.h>
 
 int MPI_Init(int *argc, char ***argv);
 int MPI_Init_thread(int *argc, char ***argv, int required, int *provided);
 int MPI_Finalize(void);
+
+int MPI_Allreduce(const void *sendbuf, void *recvbuf, int count,
+                  MPI_Datatype datatype, MPI_Op op, MPI_Comm comm);
 
 #endif // MAIN_H

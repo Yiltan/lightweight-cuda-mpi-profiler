@@ -18,13 +18,22 @@
 #include "main.h"
 
 int MPI_Init(int *argc, char ***argv) {
+  printf("Inside %s\n", __func__);
   return PMPI_Init(argc, argv);
 }
 
 int MPI_Init_thread(int *argc, char ***argv, int required, int *provided) {
+  printf("Inside %s\n", __func__);
   return PMPI_Init_thread(argc, argv, required, provided);
 }
 
+int MPI_Allreduce(const void *sendbuf, void *recvbuf, int count,
+                  MPI_Datatype datatype, MPI_Op op, MPI_Comm comm) {
+  printf("Inside %s\n", __func__);
+  return PMPI_Allreduce(sendbuf, recvbuf, count, datatype, op, comm);
+}
+
 int MPI_Finalize(void) {
+  printf("Inside %s\n", __func__);
   return PMPI_Finalize();
 }

@@ -16,9 +16,21 @@
 
 CC=mpicc
 
+ROOT_DIR := ${CURDIR}
+LDLIBS=-L$(ROOT_DIR)/build/lib
+LDFLAGS=-llwcmp
+
 all: build/obj/.d build/lib/.d
 	$(CC) -Iinclude/ -c src/main.c -o build/obj/main.o
 	$(CC) -shared -o build/lib/liblwcmp.so build/obj/main.o
+
+test: all build/bin/.d build/lib/liblwcmp.so
+	$(CC) -Iinclude/ $(LDLIBS) $(LDFLAGS) \
+		test/test.c -o build/bin/test
+
+check: test
+	LD_LIBRARY_PATH=$(ROOT_DIR)/build/lib:$(LD_LIBRARY_PATH) \
+	mpirun -np 4 $(ROOT_DIR)/build/bin/test
 
 clean:
 	rm -rf build/*
