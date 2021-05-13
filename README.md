@@ -15,6 +15,10 @@ Build the profiler:
 
 ``` cd lightweight-cuda-mpi-profiler && make ```
 
+Check that the profiler was built correctly
+
+```make check```
+
 Now link this library to your application:
 
 ```mpicc -L<path_to_this_repositroy>/build/lib -llwcmp <program_file>.c -o application```
