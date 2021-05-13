@@ -26,11 +26,11 @@ all: build/obj/.d build/lib/.d
 
 # TODO: Make test and check more generic for tests
 test: all build/bin/.d build/lib/liblwcmp.so
-	$(CC) -Iinclude/ $(LDLIBS) $(LDFLAGS) \
+	$(CC) $(LDLIBS) $(LDFLAGS) \
 		test/test.c -o build/bin/test
-	$(CC) -Iinclude/ $(LDLIBS) $(LDFLAGS) \
+	$(CC) $(LDLIBS) $(LDFLAGS) \
 		test/test_gpu_1MB.c -o build/bin/test_gpu_1MB
-	$(CC) -Iinclude/ $(LDLIBS) $(LDFLAGS) \
+	$(CC) $(LDLIBS) $(LDFLAGS) \
 		test/test_gpu_32MB.c -o build/bin/test_gpu_32MB
 
 check: test
