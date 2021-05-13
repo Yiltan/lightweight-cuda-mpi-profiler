@@ -15,26 +15,15 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-#include "main.h"
+#ifndef MPI_HELPERS_H
+#define MPI_HELPERS_H
 
-int MPI_Init(int *argc, char ***argv) {
-  init_metrics();
-  return PMPI_Init(argc, argv);
+#include "mpi.h"
+
+static inline int get_MPI_message_size(MPI_Datatype datatype, int count) {
+  int dsize;
+  MPI_Type_size(datatype, &dsize);
+  return dsize * count;
 }
 
-int MPI_Init_thread(int *argc, char ***argv, int required, int *provided) {
-  init_metrics();
-  return PMPI_Init_thread(argc, argv, required, provided);
-}
-
-int MPI_Allreduce(const void *sendbuf, void *recvbuf, int count,
-                  MPI_Datatype datatype, MPI_Op op, MPI_Comm comm) {
-
-  count_metrics(sendbuf, recvbuf, count, datatype);
-  return PMPI_Allreduce(sendbuf, recvbuf, count, datatype, op, comm);
-}
-
-int MPI_Finalize(void) {
-  print_metrics();
-  return PMPI_Finalize();
-}
+#endif // MPI_HELPERS_H
