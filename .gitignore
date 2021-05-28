@@ -3,6 +3,7 @@ build/*
 # Prerequisites
 *.d
 *.swp
+build/*
 
 # Object files
 *.o
