@@ -21,7 +21,7 @@ LDLIBS=-L$(ROOT_DIR)/build/lib
 LDFLAGS=-llwcmp -lcudart
 
 all: build/obj/.d build/lib/.d
-	$(CC) -Iinclude/ -c src/main.c -o build/obj/main.o
+	$(CC) -Wall -Werror -c -fpic -lcudart -Iinclude/ src/main.c -o build/obj/main.o
 	$(CC) -shared -o build/lib/liblwcmp.so build/obj/main.o
 
 # TODO: Make test and check more generic for tests

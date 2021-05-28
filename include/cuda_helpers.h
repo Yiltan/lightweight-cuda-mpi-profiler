@@ -27,6 +27,10 @@ static inline int is_device_pointer(const void* ptr) {
 
   // Probabbly host pointer which has not been registered with CUDA API
   if (0 != err) {
+    // This variable is unused. We collect this error so that it does not
+    // interfere with the Application's error handling.
+    #pragma GCC diagnostic ignored "-Wunused-variable"
+    cudaError_t error = cudaGetLastError();
     return 0;
   }
 
