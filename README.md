@@ -7,23 +7,32 @@ An example is givin in this repository but it can easily modified for your needs
 # Building The Project
 It is required that you have an MPI implementation and CUDA installed. This was tested with OMPI 4.0.1 and CUDA 10.1.
 
-Clone the repository:
+## Clone the repository:
 
 ```git clone https://github.com/Yiltan/lightweight-cuda-mpi-profiler.git```
 
-Build the profiler:
+## Build the profiler:
 
-``` cd lightweight-cuda-mpi-profiler && make ```
+``` cd lightweight-cuda-mpi-profiler && make && make check```
 
-Check that the profiler was built correctly
-
-```make check```
-
-Now link this library to your application:
-
+## Link this library to your application:
+### C/C++
 ```mpicc -L<path_to_this_repositroy>/build/lib -llwcmp <program_file>.c -o application```
 
-Now run your application with this profiler
+### Python
+```
+export CFLAGS="-L<path_to_this_repositroy>/build/lib -llwcmp"
+export CXXFLAGS="-L<path_to_this_repositroy>/build/lib -llwcmp" 
+python setup.py
+```
+or 
+```
+export CFLAGS="-L<path_to_this_repositroy>/build/lib -llwcmp"
+export CXXFLAGS="-L<path_to_this_repositroy>/build/lib -llwcmp" 
+pip install <package_name>
+```
+
+## Run your application with this profiler
 
 ```LD_LIBRARY_PATH=<path_to_this_repositroy>/build/lib:$(LD_LIBRARY_PATH) mpirun -np 4 ./application```
 
